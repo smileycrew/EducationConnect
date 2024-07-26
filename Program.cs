@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using EducationConnect.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 
@@ -41,9 +42,9 @@ builder.Services.AddIdentityCore<IdentityUser>(config =>
     config.Password.RequiredLength = 12;
     config.User.RequireUniqueEmail = true;
 })
-.AddRoles<IdentityRole>();
-// .AddEntityFrameworkStores<EducationConnectDbContext>();
-// builder.Services.AddNpgsql<EducationConnectDbContext>(builder.Configuration["EducationConnectDbConnectionString"]);
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<EducationConnectDbContext>();
+builder.Services.AddNpgsql<EducationConnectDbContext>(builder.Configuration["EducationConnectDbConnectionString"]);
 builder.Services.AddSwaggerGen();
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimespanBehavior", true);
